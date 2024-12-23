@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --error-color: #721c24;
+  --bg-error: #f8d7da;
+  --blue-color: rgb(11, 122, 233);
+  --blue-color-hover: rgb(6, 96, 192);
+  --green-color: #4caf50;
+  --green-color-hover: #45a049;
+  --form-bg: #f1f1f1;
+  --transition: 0.35s;
+  --br-5: 5px;
+  --br-10: 10px;
+}
+
+.error-message {
+  background-color: var(--bg-error);
+  color: var(--error-color);
+  padding: 10px;
+  border-radius: var(--br-5);
+}

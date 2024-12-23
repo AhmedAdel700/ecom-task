@@ -1,0 +1,49 @@
+.login {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.login h1 {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.login form {
+  width: 100%;
+  max-width: 500px;
+  min-width: 340px;
+  height: fit-content;
+  padding: 1.5rem 1.2rem;
+  border-radius: var(--br-10);
+  background-color: var(--form-bg);
+}
+
+.login form input {
+  outline: none;
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  padding: 10px;
+  border: none;
+}
+
+.login form button {
+  margin-top: 0.5rem;
+  padding: 10px 20px;
+  background-color: var(--green-color);
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--br-5);
+  float: right;
+  transition: var(--transition);
+
+  &:hover {
+    background-color: var(--green-color-hover);
+  }
+}
