@@ -13,7 +13,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import NotFound from "./pages/notFound/NotFound";
 import Error from "./pages/error/Error";
-import Item, { loader as itemLoader } from "./pages/item/Item";
+import Item from "./pages/item/Item";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} loader={homeLoader} />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="product/:id" element={<Item />} loader={itemLoader} />
+      <Route path="product/:id" element={<Item />} />
 
       <Route path="*" element={<NotFound />} />
     </Route>

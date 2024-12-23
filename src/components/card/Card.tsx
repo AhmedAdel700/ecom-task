@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./card.css";
+import { useState } from "react";
 
 interface Product {
   id: number;
@@ -14,17 +15,30 @@ interface Product {
   };
 }
 
-// Define the props for Card component
 interface CardProps {
   products: Product[];
+  cart: number;
+  updateCart: (newCartValue: number) => void;
 }
 
-// Helper function to truncate text to a specified length with ellipsis
 const truncateText = (text: string, length: number): string => {
   return text.length > length ? text.slice(0, length) + "..." : text;
 };
 
-const Card: React.FC<CardProps> = ({ products }) => {
+const Card: React.FC<CardProps> = ({ products, cart, updateCart }) => {
+  const [addState, setAddState] = useState<Record<number, boolean>>({});
+
+  const handleClick = (id: number) => {
+    setAddState((prevState) => {
+      const newState = { ...prevState, [id]: !prevState[id] };
+
+      // Update the cart state and localStorage
+      const updatedCart = newState[id] ? cart + 1 : cart - 1;
+      updateCart(updatedCart); // Update the cart in the parent component
+      return newState;
+    });
+  };
+
   return (
     <>
       {products.map((product) => (
@@ -39,7 +53,9 @@ const Card: React.FC<CardProps> = ({ products }) => {
 
           <div className="more">
             <Link to={`product/${product.id}`}>View</Link>
-            <button>Add To Cart</button>
+            <button onClick={() => handleClick(product.id)}>
+              {addState[product.id] ? "Remove Item" : "Add To Cart"}
+            </button>
           </div>
         </div>
       ))}

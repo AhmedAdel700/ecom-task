@@ -38,10 +38,12 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Home() {
-  // Type the state as an array of Product objects
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [user, setUser] = useState<UserData | null>(null); // Fixed type
+  const [user, setUser] = useState<UserData | null>(null);
+  const [cart, setCart] = useState<number>(
+    JSON.parse(localStorage.getItem("cart") || "0")
+  );
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -50,14 +52,19 @@ export default function Home() {
       : null;
 
     if (username) {
-      setUser(username); // Set user data when available
+      setUser(username);
     }
 
     fetchProducts().then((productsData) => {
       setProducts(productsData);
       setLoading(false);
     });
-  }, []); // Use empty dependency array to fetch data once on component mount
+  }, []);
+
+  const updateCart = (newCartValue: number) => {
+    setCart(newCartValue);
+    localStorage.setItem("cart", newCartValue.toString());
+  };
 
   if (loading) {
     return <Loading />;
@@ -66,11 +73,22 @@ export default function Home() {
   return (
     <section className="home">
       <header>
-        {user && <h2>Welcome To Products List : {user.username}</h2>}
+        {user && <h2>Welcome To Products List: {user.username}</h2>}
+        <h4>Cart Items: {cart}</h4>
       </header>
 
+      <section className="search">
+        <button className="active">All</button>
+        <button>Audio</button>
+        <button>Gaming</button>
+        <button>TV</button>
+        <button>Mobile</button>
+        <button>laptop</button>
+        <button>Appliances</button>
+      </section>
+
       <div className="products">
-        <Card products={products} />
+        <Card products={products} cart={cart} updateCart={updateCart} />
       </div>
     </section>
   );
