@@ -1,5 +1,5 @@
 // Define the type for a product
-interface Product {
+export interface Product {
   product: Product | PromiseLike<Product>;
   id: number;
   title: string;
