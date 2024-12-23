@@ -9,7 +9,9 @@ export default function Item() {
   const [item, setItem] = useState<Product | null>(null);
 
   useEffect(() => {
-    fetchItem(id).then((item) => setItem(item));
+    if (id) {
+      fetchItem(id).then((item) => setItem(item));
+    }
   }, [id]);
 
   return (
