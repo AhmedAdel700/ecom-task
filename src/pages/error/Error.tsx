@@ -1,4 +1,5 @@
 import { useRouteError } from "react-router-dom";
+import "./error.css";
 
 export default function Error(): JSX.Element {
   interface CustomError {
@@ -8,14 +9,14 @@ export default function Error(): JSX.Element {
   const error = useRouteError();
 
   return (
-    <div>
-      <h1>
+    <div className="error-section">
+      <h2>
         {`Error: ${
           (error as CustomError).status
             ? (error as CustomError).status
             : "Unexpected Error !"
         }`}
-      </h1>
+      </h2>
       <p>{(error as CustomError).message}</p>
     </div>
   );

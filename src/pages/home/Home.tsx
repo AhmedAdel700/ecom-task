@@ -39,11 +39,15 @@ export const loader: LoaderFunction = async () => {
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [renderedProducts, setRenderedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<UserData | null>(null);
   const [cart, setCart] = useState<number>(
     JSON.parse(localStorage.getItem("cart") || "0")
   );
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const categories = ["all", "audio", "gaming", "tv", "mobile"];
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -55,15 +59,40 @@ export default function Home() {
       setUser(username);
     }
 
-    fetchProducts().then((productsData) => {
+    const cachedProducts = localStorage.getItem("products");
+
+    if (cachedProducts) {
+      const productsData = JSON.parse(cachedProducts);
       setProducts(productsData);
+      setRenderedProducts(productsData);
       setLoading(false);
-    });
+    } else {
+      fetchProducts().then((productsData) => {
+        setProducts(productsData);
+        setRenderedProducts(productsData);
+        localStorage.setItem("products", JSON.stringify(productsData)); // Cache products in localStorage
+        setLoading(false);
+      });
+    }
   }, []);
 
   const updateCart = (newCartValue: number) => {
     setCart(newCartValue);
     localStorage.setItem("cart", newCartValue.toString());
+  };
+
+  const getItemByCategory = (category: string) => {
+    setActiveCategory(category);
+
+    if (category === "all") {
+      setRenderedProducts(products);
+      return;
+    }
+
+    const filteredProducts = products.filter(
+      (product) => product.category === category
+    );
+    setRenderedProducts(filteredProducts);
   };
 
   if (loading) {
@@ -78,17 +107,19 @@ export default function Home() {
       </header>
 
       <section className="search">
-        <button className="active">All</button>
-        <button>Audio</button>
-        <button>Gaming</button>
-        <button>TV</button>
-        <button>Mobile</button>
-        <button>laptop</button>
-        <button>Appliances</button>
+        {categories.map((category) => (
+          <button
+            key={category}
+            className={activeCategory === category ? "active" : ""}
+            onClick={() => getItemByCategory(category)}
+          >
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </button>
+        ))}
       </section>
 
       <div className="products">
-        <Card products={products} cart={cart} updateCart={updateCart} />
+        <Card products={renderedProducts} cart={cart} updateCart={updateCart} />
       </div>
     </section>
   );
