@@ -1,6 +1,6 @@
 # Product List App
 
-- Project Demo : ecom
+- Project Demo : [ecom](https://ecommerce-task-web.netlify.app/)
 
 - The Product List App is a simple application that allows users to view a list of products, filter them by category, and track the items in their shopping cart. Built with React, the project utilizes localStorage for state management instead of Redux Toolkit, due to uncertainty regarding its allowed usage in the context of this particular project.
 
