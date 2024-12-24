@@ -44,6 +44,15 @@
   transition: var(--transition);
 }
 
+.search .logout {
+  transition: var(--transition);
+  background-color: brown;
+
+  &:hover {
+    background-color: rgb(134, 33, 33);
+  }
+}
+
 .products {
   display: grid;
   place-items: center;

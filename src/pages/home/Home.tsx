@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LoaderFunction, redirect } from "react-router-dom";
+import { LoaderFunction, redirect, useNavigate } from "react-router-dom";
 import { fetchProducts } from "../../api";
 import Loading from "../../components/loading/Loading";
 import Card from "../../components/card/Card";
@@ -49,6 +49,8 @@ export default function Home() {
 
   const categories = ["all", "audio", "gaming", "tv", "mobile"];
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
     const username: UserData | null = storedUserData
@@ -95,6 +97,12 @@ export default function Home() {
     setRenderedProducts(filteredProducts);
   };
 
+  const logout = () => {
+    localStorage.removeItem("isAuth");
+
+    navigate("login");
+  };
+
   if (loading) {
     return <Loading />;
   }
@@ -116,6 +124,8 @@ export default function Home() {
             {category.charAt(0).toUpperCase() + category.slice(1)}
           </button>
         ))}
+
+        <button className="logout" onClick={logout}>Logout</button>
       </section>
 
       <div className="products">

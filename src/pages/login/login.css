@@ -47,3 +47,18 @@
     background-color: var(--green-color-hover);
   }
 }
+
+.login p {
+  margin-top: 1rem;
+
+  a {
+    color: var(--blue-color);
+    text-decoration: underline;
+    transition: var(--transition);
+    margin-left: 0.5rem;
+
+    &:hover {
+      color: var(--blue-color-hover);
+    }
+  }
+}

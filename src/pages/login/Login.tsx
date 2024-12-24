@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
 export default function Login() {
@@ -37,6 +37,9 @@ export default function Login() {
       user.username === userData.username &&
       user.password === userData.password
     ) {
+      // Set isAuth to true in localStorage
+      localStorage.setItem("isAuth", JSON.stringify(true));
+
       // Reset the form data
       setUserData({ username: "", password: "" });
 
@@ -78,6 +81,8 @@ export default function Login() {
 
         <button type="submit">Login</button>
       </form>
+
+      <p>Not A Memeber Yet ?<Link to='/register'>Sign up</Link></p>
     </div>
   );
 }

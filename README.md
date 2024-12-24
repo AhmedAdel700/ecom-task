@@ -9,6 +9,9 @@
 - Live Demo: [eCommerce Web](https://web-e-commerce-web.netlify.app/)
 - GitHub Repository: [eCommerce GitHub](https://github.com/AhmedAdel700/eCommerce)
 
+## Note :
+- First You Need To Create An Account Then You Will Be Redirected To Login Page , Plaese Use Your Username And Password Then You Will Redirected To Home Page
+
 ## Table of Contents
 
 - Project Overview
@@ -18,6 +21,7 @@
 - Usage
 
 ### Project Overview
+
 
 - This app displays a list of products categorized into different groups such as "audio", "gaming", "tv", and "mobile". It allows users to filter the products by category, and the products will be displayed accordingly. Users can also add items to their cart, and the cart count is stored and managed using localStorage.
 
